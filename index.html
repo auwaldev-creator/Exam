@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proctored Exam Example</title>
+</head>
+<body>
+    <h1>Exam In Progress</h1>
+    <video id="webcam" autoplay muted width="320" height="240" style="display: none;"></video>
+    <canvas id="snapshot" width="320" height="240" style="display: none;"></canvas>
+    <script>
+        // Webcam Setup
+        let webcam = document.getElementById('webcam');
+        let canvas = document.getElementById('snapshot');
+        let context = canvas.getContext('2d');
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then((stream) => {
+                webcam.srcObject = stream;
+            })
+            .catch((err) => {
+                alert('Webcam permission denied!');
+            });
+
+        // Function to capture & send snapshot
+        function sendSnapshot() {
+            context.drawImage(webcam, 0, 0, 320, 240);
+            let dataURL = canvas.toDataURL('image/jpeg');
+            fetch('/api/snapshot', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ image: dataURL })
+            });
+        }
+        // Take a snapshot every 60 seconds
+        setInterval(sendSnapshot, 60000);
+
+        // Detect tab/window switch or page hide (potential cheating)
+        ["blur", "visibilitychange"].forEach(event => {
+            window.addEventListener(event, function() {
+                if (document.hidden || event === "blur") {
+                    fetch('/api/log', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ event: 'Page left', timestamp: new Date().toISOString() })
+                    });
+                }
+            });
+        });
+    </script>
+    <p>Your exam session is being monitored for integrity.</p>
+</body>
+</html>
