@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Taraba State University | Online Exam Proctoring</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="logo-bar">
+        <img src="https://www.tsuniversity.edu.ng/images/logo.png" alt="TSU Logo" class="logo">
+        <span class="school-name">TARABA STATE UNIVERSITY</span>
+    </div>
+
+    <div class="well">
+        <strong>Notice:</strong> This proctored exam session is monitored for academic integrity by Taraba State University.
+    </div>
+
+    <main>
+        <h1>Exam In Progress</h1>
+        <div class="camera-area">
+            <video id="webcam" autoplay muted width="320" height="240"></video>
+            <canvas id="overlay" width="320" height="240"></canvas>
+        </div>
+        <div id="face-status">
+            Status: <span id="status-text">Detecting face...</span>
+        </div>
+    </main>
+
+    <script defer src="/face-api/face-api.min.js"></script>
+    <script defer src="script.js"></script>
+</body>
+</html>
