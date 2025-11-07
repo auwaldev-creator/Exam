@@ -1,0 +1,63 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f6fa;
+    margin: 0;
+    color: #222f3e;
+}
+.logo-bar {
+    display: flex;
+    align-items: center;
+    background: #056839;
+    padding: 10px 20px;
+}
+.logo {
+    height: 48px;
+    margin-right: 17px;
+}
+.school-name {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 2px;
+}
+.well {
+    background: #e1f5e8;
+    border-left: 5px solid #056839;
+    margin: 28px auto 20px;
+    padding: 18px 25px;
+    max-width: 520px;
+    border-radius: 8px;
+    font-size: 1.15em;
+}
+main {
+    max-width: 540px;
+    margin: 28px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 8px 1px #d1d8e0;
+    padding: 32px 32px 38px;
+    text-align: center;
+}
+.camera-area {
+    position: relative;
+    width: 320px;
+    height: 240px;
+    margin: 22px auto 14px;
+}
+#webcam, #overlay {
+    position: absolute;
+    left: 0; top: 0;
+    border-radius: 6px;
+}
+#overlay {
+    z-index: 2;
+    pointer-events: none;
+}
+#face-status {
+    margin: 8px 0 0;
+    font-size: 1.12em;
+}
+#status-text {
+    font-weight: bold;
+    color: #c0392b;
+  }
